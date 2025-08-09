@@ -3,7 +3,7 @@ export const resumes: Resume[] = [
         id: "1",
         companyName: "Google",
         jobTitle: "Frontend Developer",
-        imagePath: "/images/resume_01.png",
+        imagePath: "/images/resume-1.png",
         resumePath: "/resumes/resume-1.pdf",
         feedback: {
             overallScore: 85,
@@ -33,7 +33,7 @@ export const resumes: Resume[] = [
         id: "2",
         companyName: "Microsoft",
         jobTitle: "Cloud Engineer",
-        imagePath: "/images/resume_02.png",
+        imagePath: "/images/resume-2.png",
         resumePath: "/resumes/resume-2.pdf",
         feedback: {
             overallScore: 55,
@@ -93,7 +93,7 @@ export const resumes: Resume[] = [
         id: "4",
         companyName: "Google",
         jobTitle: "Frontend Developer",
-        imagePath: "/images/resume_01.png",
+        imagePath: "/images/resume-1.png",
         resumePath: "/resumes/resume-1.pdf",
         feedback: {
             overallScore: 85,
@@ -225,7 +225,7 @@ export const AIResponseFormat = `
       };
     }`;
 
-export const prepareInstructions = ({jobTitle, jobDescription}: { jobTitle: string; jobDescription: string; }) =>
+export const prepareInstructions = ({ jobTitle, jobDescription }: { jobTitle: string; jobDescription: string; }) =>
     `You are an expert in ATS (Applicant Tracking System) and resume analysis.
       Please analyze and rate this resume and suggest how to improve it.
       The rating can be low if the resume is bad.
@@ -235,7 +235,8 @@ export const prepareInstructions = ({jobTitle, jobDescription}: { jobTitle: stri
       If provided, take the job description into consideration.
       The job title is: ${jobTitle}
       The job description is: ${jobDescription}
-      Provide the feedback using the following format:
-      ${AIResponseFormat}
-      Return the analysis as an JSON object, without any other text and without the backticks.
-      Do not include any other text or comments.`;
+      Return the analysis as a single, valid JSON object, without any other text.
+        Ensure all string values are properly escaped and enclosed in double quotes.
+        For example, a string containing a double quote must be represented as \" rather than just ".
+        The JSON object should have the following structure: ${AIResponseFormat}
+        Do not include any backticks or other text outside of the JSON object.`;
